@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>{{ adventure.title }}</h2>
+    <p>{{ adventure.description }}</p>
+    <ul>
+    {% for milestone in milestones %}
+        <li>{{ milestone.title }}</li>
+    {% endfor %}
+    </ul>
+    <small>Creator: {{ adventure.created_by }}</small>
+{% endblock %}
