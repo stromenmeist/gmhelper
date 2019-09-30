@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
+
     <h2>Adventures</h2>
+
     {% for adventure in adventures %}
         <h3>{{ adventure.title }}</h3>
         <p>{{ adventure.description }}</p>
-        <small>Creator: {{ adventure.created_by }}</small>
+        <p><small>Creator: {{ adventure.created_by }}</small></p>
     {% endfor %}
+
+    <a href="{% url 'adv_create' %}">Create a new adventure</a>
+
 {% endblock %}

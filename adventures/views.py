@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import AdventureForm
 from .models import Adventure, Milestone
 
 
@@ -20,3 +21,20 @@ def adv_detail(request, pk):
         "milestones": milestones,
     }
     return render(request, "adv_detail.html", context)
+
+
+# create a new adventure
+def adv_create(request):
+    if request.method == "POST":
+        form = AdventureForm(request.POST)
+        if form.is_valid():
+            adventure = Adventure(
+                title=form.cleaned_data["title"],
+                description=form.cleaned_data["description"],
+                created_by=request.user
+            )
+            adventure.save()
+            return redirect("adventures/")
+    else:
+        form = AdventureForm()
+        return render(request, "adv_create.html", {"form": form})
